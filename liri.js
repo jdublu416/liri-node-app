@@ -14,20 +14,20 @@ var movieName="";
 if (selection === "my-tweets") {
   myTweets();
 } else if (selection === "spotify-this-song") {
-  for (var i = 3; i < nodeArgs.length; i++) {
-    if (i > 3 && i < nodeArgs.length) {
-      songName = songName + " " + nodeArgs[i];
-    } else {
-      songName += nodeArgs[i];
+ 
+    for (var i = 3; i < nodeArgs.length; i++) {
+      if (i > 3 && i < nodeArgs.length) {
+        songName += " " + nodeArgs[i];
+      } else {
+        songName += nodeArgs[i];
+      }
     }
-  }
+  
 
   spotifyThisSong(songName);
 } else if (selection === "movie-this") {
   // * `movie-this`
-  if (movieName === "") {
-    movieName = "Mr+Nobody";
-  } else {
+  
     for (var i = 3; i < nodeArgs.length; i++) {
       if (i > 3 && i < nodeArgs.length) {
         movieName = movieName + "+" + nodeArgs[i];
@@ -35,7 +35,7 @@ if (selection === "my-tweets") {
         movieName += nodeArgs[i];
       }
     }
-  }
+  
   movieThis(movieName);
 } else if (selection === "do-what-it-says") {
   var fs = require("fs");
@@ -64,6 +64,9 @@ if (selection === "my-tweets") {
 }
 
 function spotifyThisSong(songName) {
+  if(songName ===""){
+    songName="The Sign";
+  }
   console.log(songName);
   var spotify = new Spotify({
     id: process.env.SPOTIFY_ID,
@@ -121,6 +124,9 @@ function myTweets() {
 }
 
 function movieThis(movieName) {
+  if (movieName===""){
+    movieName="Mr+Nobody";
+  }
   var queryUrl =
     "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
   //check query, troubleshoot url
