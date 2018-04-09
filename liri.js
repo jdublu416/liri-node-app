@@ -7,35 +7,33 @@ var Spotify = require("node-spotify-api");
 
 var nodeArgs = process.argv;
 var selection = nodeArgs[2];
-var songName="";
-var movieName="";
+var songName = "";
+var movieName = "";
 
 // `my-tweets`
 if (selection === "my-tweets") {
   myTweets();
 } else if (selection === "spotify-this-song") {
- 
-    for (var i = 3; i < nodeArgs.length; i++) {
-      if (i > 3 && i < nodeArgs.length) {
-        songName += " " + nodeArgs[i];
-      } else {
-        songName += nodeArgs[i];
-      }
+  for (var i = 3; i < nodeArgs.length; i++) {
+    if (i > 3 && i < nodeArgs.length) {
+      songName += " " + nodeArgs[i];
+    } else {
+      songName += nodeArgs[i];
     }
-  
+  }
 
   spotifyThisSong(songName);
 } else if (selection === "movie-this") {
   // * `movie-this`
-  
-    for (var i = 3; i < nodeArgs.length; i++) {
-      if (i > 3 && i < nodeArgs.length) {
-        movieName = movieName + "+" + nodeArgs[i];
-      } else {
-        movieName += nodeArgs[i];
-      }
+
+  for (var i = 3; i < nodeArgs.length; i++) {
+    if (i > 3 && i < nodeArgs.length) {
+      movieName = movieName + "+" + nodeArgs[i];
+    } else {
+      movieName += nodeArgs[i];
     }
-  
+  }
+
   movieThis(movieName);
 } else if (selection === "do-what-it-says") {
   var fs = require("fs");
@@ -55,17 +53,16 @@ if (selection === "my-tweets") {
       songName = dataArray[1];
       console.log(songName);
       spotifyThisSong(songName);
+    }else if (dataArray[0]==="movie-this"){
+movieName = dataArray[1];
+movieThis(movieName);
     }
   });
-  // * `do-what-it-says`
-  // Using the `fs` Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
-  // * It should run `spotify-this-song` for "I Want it That Way," as follows the text in `random.txt`.
-  // * Feel free to change the text in that document to test out the feature for other commands.
 }
 
 function spotifyThisSong(songName) {
-  if(songName ===""){
-    songName="The Sign";
+  if (songName === "") {
+    songName = "The Sign";
   }
   console.log(songName);
   var spotify = new Spotify({
@@ -124,8 +121,8 @@ function myTweets() {
 }
 
 function movieThis(movieName) {
-  if (movieName===""){
-    movieName="Mr+Nobody";
+  if (movieName === "") {
+    movieName = "Mr+Nobody";
   }
   var queryUrl =
     "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
