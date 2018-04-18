@@ -22,7 +22,7 @@ if (selection === "my-tweets") {
     }
   }
 
-  spotifyThisSong(songName);
+  spotifyThisSong(songName);    
 } else if (selection === "movie-this") {
   // * `movie-this`
 
@@ -75,6 +75,7 @@ function spotifyThisSong(songName) {
     .then(function(response) {
       // console.log(response.tracks.items[0].album);
       for (var i = 0; i < 20; i++) {
+        
         var data = response.tracks.items[i];
         // console.log(data);
         var artist = data.artists[0].name;
